@@ -1,14 +1,13 @@
 package com.dynamo.demo.configuration;
 
 import org.socialsignin.spring.data.dynamodb.repository.config.EnableDynamoDBRepositories;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSCredentialsProvider;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
-import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
@@ -19,11 +18,6 @@ import com.dynamo.demo.repository.MusicRepository;
 @Configuration
 @EnableDynamoDBRepositories(basePackageClasses = MusicRepository.class)
 public class DynamoDBConfig {
-	@Value("${amazon.aws.accesskey}")
-	private String amazonAWSAccessKey;
-
-	@Value("${amazon.aws.secretkey}")
-	private String amazonAWSSecretKey;
 
 	public AWSCredentialsProvider amazonAWSCredentialsProvider() {
 		return new AWSStaticCredentialsProvider(amazonAWSCredentials());
@@ -31,7 +25,7 @@ public class DynamoDBConfig {
 
 	@Bean
 	public AWSCredentials amazonAWSCredentials() {
-		return new BasicAWSCredentials(amazonAWSAccessKey, amazonAWSSecretKey);
+		return DefaultAWSCredentialsProviderChain.getInstance().getCredentials();
 	}
 
 	@Bean
