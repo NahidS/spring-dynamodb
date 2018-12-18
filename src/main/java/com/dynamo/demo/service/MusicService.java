@@ -1,12 +1,12 @@
-package com.test.service;
+package com.dynamo.demo.service;
 
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.test.entity.Music;
-import com.test.repository.MusicRepository;
+import com.dynamo.demo.entity.Music;
+import com.dynamo.demo.repository.MusicRepository;
 
 @Service
 public class MusicService {

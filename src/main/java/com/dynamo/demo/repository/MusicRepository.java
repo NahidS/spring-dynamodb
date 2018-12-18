@@ -1,9 +1,9 @@
-package com.test.repository;
+package com.dynamo.demo.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.test.entity.Music;
+import com.dynamo.demo.entity.Music;
 
 @Repository
 public interface MusicRepository extends CrudRepository<Music, String> {
